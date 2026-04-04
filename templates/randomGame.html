@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+
+            {% for info in final_info %}
+
+            <p id="pokemon_name">{{ info.name }}</p>
+            <img id="pokemon_sprite" src="{{ info.sprite }}" alt="{{ info.name }}">
+            <p id="pokemon_id" class="id">#{{ info.id }}</p>
+
+            {% endfor %}
+
+            <button onclick="getRandomPokemon()">New Pokemon!</button>
+        </div>
+        <script src="{{ url_for('static', path='script.js') }}"></script>
+{% endblock %}

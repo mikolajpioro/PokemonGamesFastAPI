@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+   <div class="container">
+      
+      {% for info in final_hangman_info %}
+
+      <p class="name" id="pokemon_name">{{ info.name }}</p>
+      <p id="hint">{{ info.hint }}</p>
+      <img src="{{ info.sprite }}" alt="{{ info.name }}" id="pokemon_sprite">
+
+      {% endfor %}
+
+      <div class="input-container">
+         <label for="guessField" id="label">Guess a letter: </label>
+         <input type="text" maxlength="1" id="guessField">
+      </div>
+      <button type="submit" id="send-guess" onclick="sendGuess()">Submit</button>
+      <div class="wrong-answer-counter">
+         <p>Wrong answers: </p>
+         <p id="wrong_answers">0</p>
+      </div>
+   </div>
+   <script src="{{ url_for('static', path='script.js') }}"></script>
+{% endblock %}
