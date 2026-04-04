@@ -1,34 +1,31 @@
 async function getRandomPokemon() {
-    const randomId = Math.floor(Math.random() * 1025) + 1;
-    
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+        const response = await fetch('/api/pokemon/random');
         const data = await response.json();
         
         document.getElementById('pokemon_name').innerText = data.name;
         document.getElementById('pokemon_id').innerText = `#${data.id}`;
-        const spriteUrl = data.sprites.other['official-artwork'].front_default;
-        document.getElementById('pokemon_sprite').src = spriteUrl;
+        document.getElementById('pokemon_sprite').src = data.sprite;
+        
+        if(document.getElementById('hint')) {
+            document.getElementById('hint').innerText = data.hint;
+        }
         
     } catch (error) {
-        console.error("Error fetching Pokémon:", error);
+        console.error("Error fetching from backend:", error);
     }
 }
 
 async function getRandomPokemonHangman() {
-    const randomId = Math.floor(Math.random() * 1025) + 1;
-    
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+        const response = await fetch('/api/pokemon/random');
         const data = await response.json();
-        
-        document.getElementById('pokemon_name').innerText = data.name;
-        document.getElementById('pokemon_sprite').src = data.sprites.other['official-artwork'].front_default;
-        
-        document.getElementById('hint').innerText = "_ ".repeat(data.name.length).trim();
-        
+
+        document.getElementById("pokemon_name").innerText = data.name;
+        document.getElementById("pokemon_sprite").src = data.sprite;
+        document.getElementById("hint").innerText = data.hint;
     } catch (error) {
-        console.error("Error fetching Pokémon:", error);
+        console.error("Error fetching a Pokemon:", error);
     }
 }
 

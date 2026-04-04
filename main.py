@@ -70,3 +70,19 @@ def randomGame(request: Request):
 @app.get("/hangman")
 def hangmanGame(request: Request):
     return template.TemplateResponse("hangman.html", {"request": request, "final_hangman_info": final_hangman_info})
+
+@app.get("/api/pokemon/random")
+async def getPokemonApi():
+    id = random.randint(1, 1025)
+    url = f"{base_url}/pokemon/{id}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return {
+            "name": data["name"],
+            "id": data["id"],
+            "sprite": data['sprites']['other']['official-artwork']['front_default'],
+            "hint": " ".join(['_' for char in data['name']])
+        }
+    return {"error": "Could not find this Pokemon"}
