@@ -1,32 +1,34 @@
-async function getRandomPokemon() {
+async function getData() {
     try {
         const response = await fetch('/api/pokemon/random');
         const data = await response.json();
+
+        return data
+    } catch (error) {
+        console.error("Error fetching from backend", error);
+    }
+}
+
+async function getRandomPokemon() {
         
+        const data = await getData()
+
         document.getElementById('pokemon_name').innerText = data.name;
         document.getElementById('pokemon_id').innerText = `#${data.id}`;
         document.getElementById('pokemon_sprite').src = data.sprite;
         
         if(document.getElementById('hint')) {
             document.getElementById('hint').innerText = data.hint;
-        }
-        
-    } catch (error) {
-        console.error("Error fetching from backend:", error);
-    }
+        } 
 }
 
 async function getRandomPokemonHangman() {
-    try {
-        const response = await fetch('/api/pokemon/random');
-        const data = await response.json();
+
+        const data = await getData()
 
         document.getElementById("pokemon_name").innerText = data.name;
         document.getElementById("pokemon_sprite").src = data.sprite;
         document.getElementById("hint").innerText = data.hint;
-    } catch (error) {
-        console.error("Error fetching a Pokemon:", error);
-    }
 }
 
 let wrongAnswers = 0
@@ -36,7 +38,6 @@ function sendGuess() {
     const secretNameElement = document.getElementById("pokemon_name");
     const hint = document.getElementById("hint");
     const wrongAnswersElement = document.getElementById("wrong_answers");
-    const loserMessageElement = document.getElementById("loser_message");
     const secretName = secretNameElement.innerText.toLowerCase().trim()
     const guess = guessInput.value.toLowerCase().trim()
 
