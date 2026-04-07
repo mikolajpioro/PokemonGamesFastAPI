@@ -72,7 +72,7 @@ def hangmanGame(request: Request):
     return template.TemplateResponse("hangman.html", {"request": request, "final_hangman_info": final_hangman_info})
 
 
-# Api endpoints ------------------------
+# Api endpoints -------------------------
 @app.get("/api/pokemon/random")
 async def getPokemonApi():
     id = random.randint(1, 1025)
@@ -88,4 +88,4 @@ async def getPokemonApi():
             "hint": " ".join(['_' for char in data['name']])
         }
     return {"error": "Could not find this Pokemon"}
-# Api endpoints ------------------------
+# Api endpoints -------------------------
