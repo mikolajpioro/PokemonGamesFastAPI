@@ -10,7 +10,7 @@ template = Jinja2Templates(directory='templates')
 
 base_url = "https://pokeapi.co/api/v2/"
 
-# Random Pokemon app code -------------------------
+# Random Pokemon app code --------------------------
 def get_pokemon(id):
     url = f"{base_url}/pokemon/{id}"
     response = requests.get(url)
@@ -31,11 +31,11 @@ if pokemon_info:
     final_info = [
     {"name": pokemon_info["name"], "id": pokemon_info["id"], "sprite": pokemon_info["sprite"]}
 ]
-# Random Pokemon app code -------------------------
+# Random Pokemon app code --------------------------
 
 
 
-# Hangman game app code ---------------------------
+# Hangman game app code ----------------------------
 def get_pokemon_sprite(hangman_id):
     url = f"{base_url}/pokemon/{hangman_id}"
     response = requests.get(url)
@@ -57,7 +57,7 @@ if hangman_info:
     final_hangman_info = [
         {"name": hangman_info["name"], "sprite": hangman_info["sprite"], "hint": hangman_info["hint"]}
     ]
-# Hangman game app code ---------------------------
+# Hangman game app code ----------------------------
 
 @app.get("/")
 def home(request: Request):
@@ -72,7 +72,7 @@ def hangmanGame(request: Request):
     return template.TemplateResponse("hangman.html", {"request": request, "final_hangman_info": final_hangman_info})
 
 
-# Api endpoints -------------------------
+# Api endpoints --------------------------
 @app.get("/api/pokemon/random")
 async def getPokemonApi():
     id = random.randint(1, 1025)
@@ -88,4 +88,4 @@ async def getPokemonApi():
             "hint": " ".join(['_' for char in data['name']])
         }
     return {"error": "Could not find this Pokemon"}
-# Api endpoints -------------------------
+# Api endpoints ---------------------------
