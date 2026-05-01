@@ -61,15 +61,15 @@ if hangman_info:
 
 @app.get("/")
 def home(request: Request):
-    return template.TemplateResponse("home.html", {"request": request})
+    return template.TemplateResponse("home.html", {"request": request, "title": "Home page"})
 
 @app.get("/random")
 def randomGame(request: Request):
-    return template.TemplateResponse("randomGame.html", {"request": request, "final_info": final_info})
+    return template.TemplateResponse("randomGame.html", {"request": request, "final_info": final_info, "title": "Let's see a random Pokemon"})
 
 @app.get("/hangman")
 def hangmanGame(request: Request):
-    return template.TemplateResponse("hangman.html", {"request": request, "final_hangman_info": final_hangman_info})
+    return template.TemplateResponse("hangman.html", {"request": request, "final_hangman_info": final_hangman_info, "title": "Pokemon hangman game"})
 
 
 # Api endpoints --------------------------
