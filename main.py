@@ -31,11 +31,11 @@ if pokemon_info:
     final_info = [
     {"name": pokemon_info["name"], "id": pokemon_info["id"], "sprite": pokemon_info["sprite"]}
 ]
-# Random Pokemon app code -----------------------
+# Random Pokemon app code ----------------------
 
 
 
-# Hangman game app code -------------------------
+# Hangman game app code ------------------------
 def get_pokemon_sprite(hangman_id):
     url = f"{base_url}/pokemon/{hangman_id}"
     response = requests.get(url)
